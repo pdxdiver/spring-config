@@ -1,0 +1,31 @@
+configuration:
+  projectName: django-web
+server:
+  port: 8000
+zuul:
+  routes:
+    cats:
+      url: http://cat-service:8080
+      path: /cats/**
+      stripPrefix: false
+    dogs:
+      url: http://dog-service:8080
+      path: /dogs/**
+      stripPrefix: false
+
+---
+spring:
+  profiles: development
+server:
+  port: 8080
+zuul:
+  routes:
+    cats:
+      url: http://localhost:9000
+      path: /cats/**
+      stripPrefix: false
+    dogs:
+      url: http://localhost:9001
+      path: /dogs/**
+      stripPrefix: false
+debug: true
